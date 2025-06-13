@@ -10,7 +10,7 @@ beforeAll(async () => {
 
 describe('Auth API', () => {
   const testUser = {
-    "name": "string",
+  "name": "string",
   "email": "user@example.com",
   "password": "string",
   "role": "owner",

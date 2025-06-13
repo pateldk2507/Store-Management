@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const authRoutes = require('./auth');
-
-router.use('/auth', authRoutes);
-
 // Add other routes below
+router.use('/auth', authRoutes);
+router.use('/businesses', require('./business'));
+
 
 module.exports = router;

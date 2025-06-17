@@ -1,0 +1,129 @@
+{
+  "tags": [
+    { "name": "Schedule", "description": "Employee scheduling management" }
+  ],
+  "paths": {
+    "/api/v1/schedules": {
+      "get": {
+        "tags": ["Schedule"],
+        "summary": "Get all schedules",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "List of schedules",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Schedule" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Schedule"],
+        "summary": "Create a schedule (Owner/Manager only)",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ScheduleInput" }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Schedule created" },
+          "403": { "description": "Forbidden" },
+          "500": { "description": "Server error" }
+        }
+      }
+    },
+    "/api/v1/schedules/{id}": {
+      "get": {
+        "tags": ["Schedule"],
+        "summary": "Get schedule by ID",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+        ],
+        "responses": {
+          "200": { "description": "Schedule details" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not found" }
+        }
+      },
+      "put": {
+        "tags": ["Schedule"],
+        "summary": "Update schedule",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ScheduleInput" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Schedule updated" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not found" }
+        }
+      },
+      "delete": {
+        "tags": ["Schedule"],
+        "summary": "Delete schedule",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+        ],
+        "responses": {
+          "200": { "description": "Schedule deleted" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not found" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Schedule": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "user_id": { "type": "integer" },
+          "location_id": { "type": "integer" },
+          "date": { "type": "string", "format": "date" },
+          "start_time": { "type": "string", "format": "time" },
+          "end_time": { "type": "string", "format": "time" },
+          "created_at": { "type": "string", "format": "date-time" },
+          "updated_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "ScheduleInput": {
+        "type": "object",
+        "required": ["user_id", "location_id", "date", "start_time", "end_time"],
+        "properties": {
+          "user_id": { "type": "integer" },
+          "location_id": { "type": "integer" },
+          "date": { "type": "string", "format": "date" },
+          "start_time": { "type": "string", "format": "time" },
+          "end_time": { "type": "string", "format": "time" }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

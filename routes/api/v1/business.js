@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const businessController = require('../../../controllers/api/v1/businessController');
+const businessController = require('../../../controllers/businessController');
 const authMiddleware = require('../../../middlewares/auth');
 
 router.use(authMiddleware); // Protect all routes below

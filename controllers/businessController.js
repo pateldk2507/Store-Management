@@ -1,4 +1,6 @@
-const Business = require('../../../models/Business');
+const Business = require('../models/Business');
+
+const Location = require('../models/Location');
 
 exports.createBusiness = async (req, res) => {
   try {
@@ -9,6 +11,13 @@ exports.createBusiness = async (req, res) => {
     
     
     const business = await Business.create({ name, address, logo, brand_color, owner_id });
+
+    await Location.create({
+      business_id: business.id,
+      name : name + ' Main Location',
+      address: address || null,
+    });
+
     res.status(201).json(business);
   } catch (err) {
     res.status(500).json({ message: 'Failed to create business', error: err.message });

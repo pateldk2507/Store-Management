@@ -24,16 +24,21 @@ describe('Auth API', () => {
     const res = await request(app)
       .post('/api/v1/auth/register')
       .send(testUser);
+    
+      if (res.statusCode !== 201) {
+        console.error('Server error:', res.body);
+      }
 
-    expect(res.statusCode).toBe(201);
-    expect(res.body).toHaveProperty('user');
-    expect(res.body.user.email).toBe(testUser.email);
-    expect(res.body.user).toHaveProperty('name');
-    expect(res.body.user).toHaveProperty('role');
-    expect(res.body.user).toHaveProperty('business_id');
-    expect(res.body.user).toHaveProperty('temp_password');
-    expect(res.body.user).toHaveProperty('phone');
-    expect(res.body.user).toHaveProperty('is_temp_password');
+      expect(res.statusCode).toBe(201);
+      expect(res.body).toHaveProperty('user');
+      expect(res.body.user.email).toBe(testUser.email);
+      expect(res.body.user).toHaveProperty('name');
+      expect(res.body.user).toHaveProperty('role');
+      expect(res.body.user).toHaveProperty('business_id');
+      expect(res.body.user).toHaveProperty('temp_password');
+      expect(res.body.user).toHaveProperty('phone');
+      expect(res.body.user).toHaveProperty('is_temp_password');
+    
   });
 
   test('Login user', async () => {

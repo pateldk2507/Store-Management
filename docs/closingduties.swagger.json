@@ -1,0 +1,95 @@
+{
+  "tags": [
+    { "name": "Closing Duties owner", "description": "Owner-created closing duty checklist" }
+  ],
+  "paths": {
+    "/api/v1/closing-duties/": {
+      "post": {
+        "tags": ["Closing Duties owner"],
+        "summary": "Create closing duty",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ClosingDutyInput" }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Duty created" }
+        }
+      },
+      "get": {
+        "tags": ["Closing Duties owner"],
+        "summary": "Get all closing duties",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "List of duties",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ClosingDuty" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/closing-duties/{id}": {
+      "put": {
+        "tags": ["Closing Duties owner"],
+        "summary": "Update duty",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ClosingDutyInput" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Duty updated" }
+        }
+      },
+      "delete": {
+        "tags": ["Closing Duties owner"],
+        "summary": "Delete duty",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+        ],
+        "responses": {
+          "200": { "description": "Duty deleted" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ClosingDuty": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "business_id": { "type": "integer" },
+          "duty": { "type": "string" }
+          
+        }
+      },
+      "ClosingDutyInput": {
+        "type": "object",
+        "required": ["duty"],
+        "properties": {
+          "duty": { "type": "string" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "tags": [
+    { "name": "Closing Duties Employee", "description": "Manage daily closing duty submissions" }
+  ],
+  "paths": {
+    "/api/v1/closing-duties/submission": {
+      "get": {
+        "tags": ["Closing Duties Employee"],
+        "summary": "Get all submissions (owner/manager only)",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "List of submissions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ClosingDutySubmission" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/closing-duties/submit": {
+      "post": {
+          "tags": ["Closing Duties Employee"],
+          "summary": "Submit closing duties",
+          "security": [{ "bearerAuth": [] }],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ClosingDutySubmissionInput" }
+              }
+            }
+          },
+          "responses": {
+            "201": { "description": "Submission created" }
+          }
+        }
+    },
+
+    "/api/v1/closing-duties/my": {
+      "get": {
+        "tags": ["Closing Duties Employee"],
+        "summary": "Get my submissions",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "User's own submissions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ClosingDutySubmission" }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ClosingDutySubmission": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "user_id": { "type": "integer" },
+          "location_id": { "type": "integer" },
+          "date": { "type": "string", "format": "date" },
+          "completed_duties": { "type": "string" },
+          "signature": { "type": "string" },
+          "created_at": { "type": "string", "format": "date-time" },
+          "updated_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "ClosingDutySubmissionInput": {
+        "type": "object",
+        "required": ["location_id", "date", "completed_duties"],
+        "properties": {
+          "location_id": { "type": "integer" },
+          "date": { "type": "string", "format": "date" },
+          "completed_duties": { "type": "string" },
+          "signature": { "type": "string" }
+        }
+      }
+    }
+  }
+}

@@ -6,7 +6,7 @@ const Employee = require('./Employee');
 const Business = require('./Business');
 const Schedule = require('./Schedule');
 const Location = require('./Location');
-
+const Sale = require('./Sale');
 
 
 // Define associations
@@ -15,6 +15,9 @@ Schedule.belongsTo(User, { foreignKey: 'user_id' });
 
 Business.hasMany(Location, { foreignKey: 'business_id', onDelete: 'CASCADE' });
 Location.belongsTo(Business, { foreignKey: 'business_id' });
+
+User.hasMany(Sale, { foreignKey: 'user_id' });
+Sale.belongsTo(User, { foreignKey: 'user_id' });
 
 
 const syncDB = async () => {
@@ -27,6 +30,7 @@ module.exports = {
   Business,
   Schedule, 
   Location,
+  Sale,
   syncDB,
   sequelize
 };

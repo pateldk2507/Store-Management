@@ -3,6 +3,8 @@ const { DataTypes, Model } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/database');
 
+const Sale = require('./Sale');
+
 class User extends Model {
   // Method to compare password
   async validPassword(password) {
@@ -85,6 +87,6 @@ User.init(
   }
 );
 
-
+User.hasMany(Sale, { foreignKey: 'user_id' });
 
 module.exports = User;

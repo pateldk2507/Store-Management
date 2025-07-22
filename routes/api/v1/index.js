@@ -9,5 +9,5 @@ router.use('/employees', require('./employees'));
 router.use('/schedules', require('./schedule'));
 router.use('/categories', require('./category'));
 router.use('/closing-duties', require('./closingDuties'));
-
+router.use('/sales', require('./sales'));
 module.exports = router;

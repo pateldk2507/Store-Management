@@ -5,6 +5,7 @@ const schedule = require('./schedule.swagger.json');
 const categories = require('./category.swagger.json');
 const closing_duties = require('./closingduties.swagger.json');
 const emp_closing = require('./empclosing.swagger.json')
+ const sales = require('./sales.swagger.json');
 
 module.exports = {
   openapi: "3.0.0",
@@ -19,7 +20,8 @@ module.exports = {
     ...categories.tags,
     ...closing_duties.tags,
     ...emp_closing.tags,
-    ...schedule.tags
+    ...schedule.tags,
+    ...sales.tags
   ],
   paths: {
     ...auth.paths,
@@ -28,7 +30,8 @@ module.exports = {
     ...categories.paths,
     ...closing_duties.paths,
     ...emp_closing.paths,
-    ...schedule.paths
+    ...schedule.paths,
+    ...sales.paths
   },
   components: {
     schemas: {
@@ -38,7 +41,8 @@ module.exports = {
       ...(categories.components?.schemas || {}),
       ...(closing_duties.components?.schemas || {}),
       ...(emp_closing.components?.schemas || {}),
-      ...(schedule.components?.schemas || {})
+      ...(schedule.components?.schemas || {}),
+      ...(sales.components?.schemas || {})
     },
     securitySchemes: {
       ...(auth.components?.securitySchemes || {}),
@@ -47,7 +51,8 @@ module.exports = {
       ...(categories.components?.securitySchemes || {}),
       ...(closing_duties.components?.securitySchemes || {}),
       ...(emp_closing.components?.securitySchemes || {}),
-      ...(schedule.components?.securitySchemes || {})
+      ...(schedule.components?.securitySchemes || {}),
+      ...(sales.components?.securitySchemes || {})
     }
   }
 };

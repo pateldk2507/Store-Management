@@ -4,7 +4,7 @@ const router = express.Router();
 const apiV1Routes = require('./api/v1');
 
 router.get('/', (req, res) => {
-  res.send('Welcome to Automation world');
+  res.send('Welcome to Ci/CD Store Management API');
 });
 
 router.use('/api/v1', apiV1Routes);

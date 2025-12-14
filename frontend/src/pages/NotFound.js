@@ -2,7 +2,7 @@ const NotFound = () => {
   return (
     <div>
       <h1>Not Found</h1>
-      <p>Welcome to your NotFound! Here you can find user-specific information and navigation options.</p>
+      <p>This location is not exist</p>
     </div>
   );
 };

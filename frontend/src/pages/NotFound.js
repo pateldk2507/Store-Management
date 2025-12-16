@@ -1,6 +1,6 @@
 const NotFound = () => {
   return (
-    <div>
+    <div style={{ textAlign: 'center', marginTop: '50px', color: 'red' }}>
       <h1>!!!!!!!!!!!!!!Not Found!!!!!!!!!!!!!!!!!</h1>
       <p>!!!!!!!!!!!!!!!!!This!!!!!!!!!!!!!!!!!!!!</p>
       <p>!!!!!!!!!!!!!!!location!!!!!!!!!!!!!!!!!!</p> 

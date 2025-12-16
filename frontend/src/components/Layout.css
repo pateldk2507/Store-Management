@@ -44,8 +44,8 @@
 /* Sidebar Styling */
 .sidebar {
   background-color: #0f3460;
-  width: 250px;
-  padding: 20px 0;
+  width: 150px;
+  padding: 10px 0;
   overflow-y: auto;
   transition: width 0.3s ease;
 }

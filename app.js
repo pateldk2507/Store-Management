@@ -11,7 +11,7 @@ const swaggerDoc = require('./docs/swagger');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/', routes);
+app.use('/api', routes);
 app.use('/api/v1', apiRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
